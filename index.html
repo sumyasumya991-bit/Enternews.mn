@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enter News — Нэг товшилтоор дэлхийг мэд</title>
+<meta name="description" content="Enter News — Нэг товшилтоор дэлхийг мэд. Монгол болон дэлхийн шинэ мэдээ.">
+<meta property="og:title" content="Enter News">
+<meta property="og:description" content="Нэг товшилтоор дэлхийг мэд">
+<meta property="og:image" content="assets/cover.jpg">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e41e26;--ink:#0b0b0b;--text:#141414;--muted:#6b6b6b;--line:#e3e3e3;--bg:#fff;--soft:#f5f5f5;--serif:Merriweather,Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;border:0;background:none}
+button{cursor:pointer}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* ---------- Header ---------- */
+.utility{background:var(--ink);color:#bdbdbd;font-size:13px;border-top:5px solid var(--red)}
+.utility .wrap{display:flex;justify-content:space-between;align-items:center;height:36px;gap:16px}
+.utility a:hover{color:#fff}
+.utility .links{display:flex;gap:18px}
+.masthead{background:var(--ink);color:#fff}
+.masthead .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-top:22px;padding-bottom:22px}
+.logo{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:.82;cursor:pointer;user-select:none}
+.logo .e{font-weight:900;letter-spacing:-.045em;font-size:56px}
+.logo .e i{font-style:normal;color:var(--red)}
+.logo .n{background:var(--red);color:#fff;font-weight:800;letter-spacing:.2em;font-size:19px;padding:4px 8px 3px 11px;align-self:flex-end;margin-right:24px;margin-top:5px}
+.tagline{font-size:13px;color:#9a9a9a;letter-spacing:.25em;text-transform:uppercase}
+.mh-right{display:flex;justify-content:flex-end;gap:10px}
+.btn{height:40px;padding:0 18px;border-radius:2px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#c8151d}
+.btn-ghost{border:1px solid #3a3a3a;color:#fff}.btn-ghost:hover{border-color:#fff}
+.nav{background:var(--ink);border-top:1px solid #222;position:sticky;top:0;z-index:40}
+.nav .wrap{display:flex;align-items:center;height:50px;gap:4px}
+.nav .mini{display:none;line-height:.8;margin-right:14px}
+.nav .mini .e{font-weight:900;font-size:22px;color:#fff;letter-spacing:-.04em}.nav .mini i{color:var(--red);font-style:normal}
+.nav.stuck .mini{display:block}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav-links a{color:#e6e6e6;font-weight:600;font-size:15px;padding:0 14px;height:50px;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent}
+.nav-links a:hover{color:#fff;border-color:#555}
+.nav-links a.active{border-color:var(--red);color:#fff}
+.search-btn{color:#fff;width:40px;height:40px;display:grid;place-items:center}
+.searchbar{display:none;background:#151515;border-top:1px solid #222}
+.searchbar.open{display:block}
+.searchbar input{width:100%;height:56px;color:#fff;font-size:18px;outline:none}
+
+.breaking{background:var(--red);color:#fff}
+.breaking .wrap{display:flex;align-items:center;height:44px;gap:16px;overflow:hidden}
+.breaking b{background:#fff;color:var(--red);font-size:12px;font-weight:900;letter-spacing:.12em;padding:4px 10px;flex:none}
+.breaking .tk{white-space:nowrap;overflow:hidden;flex:1;mask-image:linear-gradient(90deg,#000 90%,transparent)}
+.breaking .tk span{display:inline-block;animation:tick 45s linear infinite;padding-left:100%}
+.breaking .tk em{font-style:normal;margin-right:56px;font-weight:600}
+.breaking .tk em::before{content:"■";font-size:9px;margin-right:10px;vertical-align:2px;opacity:.75}
+.breaking:hover .tk span{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+/* ---------- Media placeholder (replace with real photos via img) ---------- */
+.media{position:relative;overflow:hidden;background:#111;aspect-ratio:16/9;display:block}
+.media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.media .ph{position:absolute;inset:0;transition:transform .5s}
+.media .ph::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px}
+.media .wm{position:absolute;right:-6px;bottom:-14px;font-weight:900;font-size:clamp(40px,9vw,120px);letter-spacing:-.05em;color:rgba(255,255,255,.07);line-height:1;text-transform:uppercase;white-space:nowrap}
+.media .mk{position:absolute;top:12px;left:14px;line-height:.8;color:#fff}
+.media .mk .e{font-weight:900;font-size:17px;letter-spacing:-.04em}.media .mk i{color:var(--red);font-style:normal}
+.media .play{position:absolute;left:14px;bottom:14px;width:46px;height:46px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff}
+a:hover .media img,a:hover .media .ph{transform:scale(1.04)}
+a:hover .hl{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+
+.kicker{color:var(--red);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.hl{font-family:var(--serif);font-weight:900;line-height:1.22;color:var(--text)}
+.meta{color:var(--muted);font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.meta .dot{width:3px;height:3px;border-radius:50%;background:#aaa}
+.live{display:inline-flex;align-items:center;gap:6px;color:var(--red);font-weight:800;font-size:12px;letter-spacing:.1em}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* ---------- Home ---------- */
+main{padding:28px 0 60px}
+.top{display:grid;grid-template-columns:2.1fr 1fr 1fr;gap:28px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.lead .hl{font-size:38px;margin:14px 0 10px}
+.lead p{color:#3b3b3b;font-size:17px;margin-bottom:12px}
+.col-stack{display:flex;flex-direction:column;gap:22px}
+.card .hl{font-size:19px;margin:10px 0 6px}
+.card p{color:#4a4a4a;font-size:14.5px;margin-bottom:6px}
+.list-item{padding:14px 0;border-top:1px solid var(--line)}
+.list-item:first-child{border-top:0;padding-top:0}
+.list-item .hl{font-size:17px;margin:4px 0 6px}
+
+.sec{padding-top:36px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;border-top:4px solid var(--ink);padding-top:10px;margin-bottom:20px}
+.sec-head h2{font-size:24px;font-weight:900;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.sec-head h2::before{content:"";width:10px;height:10px;background:var(--red)}
+.sec-head a{font-size:14px;font-weight:700;color:var(--red)}
+.sec-head a:hover{text-decoration:underline}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px}
+
+/* Most read */
+.most{counter-reset:m;background:var(--soft);padding:22px}
+.most h3{font-size:20px;font-weight:900;margin-bottom:10px;border-bottom:3px solid var(--red);padding-bottom:8px}
+.most a{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.most a:last-child{border:0}
+.most a::before{counter-increment:m;content:counter(m);font-family:var(--serif);font-weight:900;font-size:34px;color:var(--red);line-height:1;min-width:28px}
+.most .hl{font-size:15.5px}
+
+/* Video band */
+.video-band{background:var(--ink);color:#fff;margin:44px calc(50% - 50vw) 0;padding:36px calc(50vw - 50%) 44px;border-top:5px solid var(--red)}
+html,body{overflow-x:hidden}
+.video-band .sec-head{border-color:#fff}
+.video-band .hl{color:#fff}
+.video-band .meta{color:#9a9a9a}
+.vgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+.vgrid .card:first-child .hl{font-size:26px}
+
+/* Opinion */
+.op{display:flex;gap:14px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-top:3px solid var(--red)}
+.op .av{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px}
+.op .hl{font-size:17px;font-style:italic;margin:2px 0 6px}
+.op b{font-size:13px}
+
+/* Newsletter */
+.news-cta{margin-top:44px;background:var(--ink);color:#fff;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:32px 36px;border-left:8px solid var(--red)}
+.news-cta h3{font-size:24px;font-weight:900}
+.news-cta p{color:#a8a8a8}
+.news-cta form{display:flex}
+.news-cta input{background:#fff;color:#111;height:46px;padding:0 14px;width:280px;outline:none}
+
+/* ---------- Article page ---------- */
+.article{max-width:780px;margin:0 auto}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:16px}
+.crumbs a{color:var(--red);font-weight:700}
+.article h1{font-family:var(--serif);font-weight:900;font-size:42px;line-height:1.18;margin:12px 0 16px}
+.article .standfirst{font-size:20px;color:#333;line-height:1.5;margin-bottom:20px}
+.byline{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px}
+.byline img{width:44px;height:44px;border-radius:50%}
+.byline .share{margin-left:auto;display:flex;gap:8px}
+.share button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-weight:800;font-size:14px}
+.share button:hover{border-color:var(--ink)}
+.article .media{margin-bottom:8px}
+.caption{font-size:13px;color:var(--muted);margin-bottom:24px}
+.body p{font-size:18.5px;line-height:1.75;margin-bottom:20px;color:#1d1d1d}
+.body p:first-child::first-letter{font-family:var(--serif);float:left;font-size:64px;line-height:.9;padding:6px 10px 0 0;color:var(--red);font-weight:900}
+.body blockquote{border-left:5px solid var(--red);padding:6px 0 6px 20px;margin:28px 0;font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.4}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0}
+.tags a{background:var(--soft);padding:6px 12px;font-size:13px;font-weight:600}
+.tags a:hover{background:var(--ink);color:#fff}
+.related{border-top:4px solid var(--ink);margin-top:40px;padding-top:12px}
+.related h3{font-size:20px;font-weight:900;margin-bottom:16px}
+
+/* ---------- Video screen (бичлэгийн дэлгэц) ---------- */
+.vhero{background:var(--ink);color:#fff;margin:-28px calc(50% - 50vw) 32px;padding:26px calc(50vw - 50%) 30px;border-bottom:1px solid #222}
+.vh-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+.player{position:relative;background:#000;aspect-ratio:16/9;overflow:hidden;border-top:4px solid var(--red)}
+.player video,.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:#000}
+.player .badge{position:absolute;top:14px;left:14px;z-index:2;background:var(--red);color:#fff;font-size:12px;font-weight:900;letter-spacing:.12em;padding:5px 10px;display:flex;gap:7px;align-items:center}
+.player .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+.player .sound{position:absolute;right:14px;bottom:14px;z-index:2;background:rgba(0,0,0,.7);color:#fff;font-weight:700;font-size:13px;padding:9px 14px;border:1px solid #444}
+.player .sound:hover{background:var(--red);border-color:var(--red)}
+.player .empty-v{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 80% 20%,rgba(228,30,38,.35),transparent 55%),#0b0b0b;color:#bbb;padding:20px}
+.player .empty-v b{display:block;color:#fff;font-size:22px;margin-bottom:6px}
+.vh-info{margin-top:14px}
+.vh-info .hl{color:#fff;font-size:26px;margin:6px 0}
+.vh-info .meta{color:#9a9a9a}
+.vlist{display:flex;flex-direction:column;background:#111;border:1px solid #222;max-height:100%;overflow:auto}
+.vlist h3{font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:14px 16px;border-bottom:1px solid #222;display:flex;justify-content:space-between}
+.vlist h3 span{color:var(--red)}
+.vitem{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 16px;border-bottom:1px solid #1d1d1d;text-align:left;color:#fff;align-items:start}
+.vitem:hover{background:#181818}
+.vitem.on{background:#1c1c1c;box-shadow:inset 4px 0 0 var(--red)}
+.vthumb{position:relative;aspect-ratio:16/9;background:#000 center/cover;border:1px solid #2a2a2a}
+.vthumb i{position:absolute;right:4px;bottom:4px;background:rgba(0,0,0,.8);font-style:normal;font-size:11px;font-weight:700;padding:1px 5px}
+.vthumb::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:16px;color:#fff;text-shadow:0 0 8px #000}
+.vitem.on .vthumb::after{content:"❚❚";color:var(--red);font-size:13px}
+.vitem b{font-size:14px;line-height:1.35;font-weight:700;display:block}
+.vitem small{color:#8a8a8a;font-size:12px}
+@media (max-width:1100px){.vh-grid{grid-template-columns:1fr}.vlist{max-height:none}}
+@media (max-width:760px){.vhero{padding-top:16px}.vh-info .hl{font-size:20px}.vitem{grid-template-columns:100px 1fr}}
+
+/* ---------- Mini video screen (жижиг бичлэгийн дэлгэц) ---------- */
+.mini{position:fixed;right:20px;bottom:20px;width:340px;z-index:60;background:#0b0b0b;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.45);border-top:4px solid var(--red);transition:transform .3s,opacity .3s}
+.mini.hide{transform:translateY(130%);opacity:0;pointer-events:none}
+.mini-bar{display:flex;align-items:center;gap:8px;padding:7px 8px 7px 12px;font-size:11px;font-weight:900;letter-spacing:.12em}
+.mini-bar .lv{display:flex;align-items:center;gap:6px;color:#fff;flex:1}
+.mini-bar .lv::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 1.4s infinite}
+.mini-bar button{width:28px;height:28px;display:grid;place-items:center;color:#cfcfcf;font-size:15px}
+.mini-bar button:hover{color:#fff;background:#222}
+.mini .player{aspect-ratio:16/9;border:0}
+.mini .player .sound{right:8px;bottom:8px;padding:5px 9px;font-size:12px}
+.mini-t{padding:8px 12px 11px;font-size:13px;font-weight:700;line-height:1.35;display:flex;gap:8px;align-items:flex-start}
+.mini-t span{flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mini-t small{color:#8a8a8a;font-weight:500;white-space:nowrap}
+.mini-open{position:fixed;right:20px;bottom:20px;z-index:59;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:11px 16px;box-shadow:0 6px 20px rgba(0,0,0,.35);display:none}
+.mini.hide~.mini-open{display:block}
+@media (max-width:760px){.mini{width:220px;right:10px;bottom:10px}.mini-t{display:none}.mini-open{right:10px;bottom:10px}}
+
+/* ---------- Ad screen (сурталчилгааны дэлгэц) ---------- */
+.with-ad{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:start}
+.with-ad>aside{align-self:stretch}
+.ad-sticky{margin-top:24px}
+aside>.ad-sticky:last-child{position:sticky;top:66px}
+.with-ad>aside>.ad-sticky:first-child{margin-top:0}
+.ad-label{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ad-label a{color:var(--red);font-weight:700;letter-spacing:.05em;text-transform:none}
+.adbox{position:relative;width:300px;max-width:100%;aspect-ratio:300/250;overflow:hidden;background:#0b0b0b;border:1px solid #1f1f1f;border-top:4px solid var(--red)}
+.ad-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff;text-decoration:none}
+.ad-slide.on{opacity:1;z-index:1}
+.ad-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ad-slide .ad-bg{position:absolute;inset:0}
+.ad-slide>*:not(.ad-bg):not(img){position:relative}
+.ad-slide small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ffb3b6;font-weight:700}
+.ad-slide strong{font-size:23px;font-weight:900;line-height:1.15;margin:6px 0 6px;letter-spacing:-.01em}
+.ad-slide span{font-size:13.5px;color:#d0d0d0}
+.ad-slide em{font-style:normal;align-self:flex-start;margin-top:12px;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:7px 14px}
+.ad-dots{position:absolute;top:12px;right:12px;display:flex;gap:5px;z-index:2}
+.ad-dots i{width:18px;height:3px;background:rgba(255,255,255,.3);overflow:hidden;position:relative}
+.ad-dots i.on::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;animation:adbar var(--ad-ms) linear forwards}
+@keyframes adbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.adbox:hover .ad-dots i.on::after{animation-play-state:paused}
+
+/* ---------- Info pages (Бидний тухай / Холбоо барих / Сурталчилгаа) ---------- */
+.pg-hero{background:var(--ink);color:#fff;margin:-28px calc(50% - 50vw) 40px;padding:56px calc(50vw - 50%) 50px;position:relative;overflow:hidden;border-bottom:5px solid var(--red)}
+.pg-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(228,30,38,.35),transparent 45%)}
+.pg-hero>*{position:relative}
+.pg-hero .crumbs{color:#8a8a8a}
+.pg-hero h1{font-size:52px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin:10px 0 14px}
+.pg-hero p{font-size:19px;color:#cfcfcf;max-width:720px}
+.pg-tabs{display:flex;gap:6px;margin-top:26px;flex-wrap:wrap}
+.pg-tabs a{border:1px solid #3a3a3a;padding:8px 16px;font-weight:700;font-size:14px;color:#ddd}
+.pg-tabs a:hover{border-color:#fff;color:#fff}
+.pg-tabs a.on{background:var(--red);border-color:var(--red);color:#fff}
+.pg-sec{margin-bottom:48px}
+.pg-sec>h2{font-size:28px;font-weight:900;letter-spacing:-.02em;border-top:4px solid var(--ink);padding-top:12px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.pg-sec>h2::before{content:"";width:10px;height:10px;background:var(--red)}
+.pg-lead{font-size:19px;line-height:1.7;color:#222;max-width:860px}
+.pg-lead+.pg-lead{margin-top:14px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{border:1px solid var(--line);border-top:4px solid var(--red);padding:22px}
+.tile .ic{font-size:28px;margin-bottom:10px}
+.tile h3{font-size:18px;font-weight:800;margin-bottom:6px}
+.tile p{color:#555;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips a{background:var(--soft);padding:10px 16px;font-weight:700}
+.chips a:hover{background:var(--ink);color:#fff}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ccard{display:flex;gap:16px;align-items:flex-start;padding:22px;border:1px solid var(--line);transition:border-color .2s}
+.ccard:hover{border-color:var(--ink)}
+.ccard .ic{width:52px;height:52px;flex:none;display:grid;place-items:center;font-size:22px;color:#fff;background:var(--ink)}
+.ccard small{display:block;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.ccard b{display:block;font-size:17px;word-break:break-all;margin:3px 0}
+.ccard span{font-size:13px;color:var(--muted)}
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:860px}
+.cform label{font-size:13px;font-weight:700;display:flex;flex-direction:column;gap:6px}
+.cform input,.cform select,.cform textarea{border:1px solid #cfcfcf;padding:12px 14px;font:inherit;font-weight:400;outline:none;background:#fff}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--red)}
+.cform .full{grid-column:1/-1}
+.cform textarea{min-height:140px;resize:vertical}
+.partners{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.partner{border:1px solid var(--line);display:flex;flex-direction:column}
+.partner .pl{aspect-ratio:16/9;display:grid;place-items:center;background:var(--soft);font-weight:900;font-size:22px;letter-spacing:-.02em;color:#9a9a9a;border-bottom:1px solid var(--line);overflow:hidden}
+.partner .pl img{width:100%;height:100%;object-fit:contain;padding:18px;background:#fff}
+.partner .pb{padding:16px}
+.partner .pb small{color:var(--red);font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.partner .pb h3{font-size:17px;font-weight:800;margin:4px 0 6px}
+.partner .pb p{font-size:14px;color:#555}
+.partner .pb a{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--red)}
+.pkgs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pkg{background:var(--ink);color:#fff;padding:24px;border-top:4px solid var(--red)}
+.pkg h3{font-size:19px;font-weight:900;margin:8px 0}
+.pkg p{color:#b5b5b5;font-size:14px}
+.pkg .sz{color:#ffb3b6;font-size:12px;font-weight:800;letter-spacing:.12em}
+.cta-band{background:var(--soft);border-left:8px solid var(--red);padding:30px 34px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.cta-band h3{font-size:24px;font-weight:900}
+@media (max-width:1100px){.tiles,.partners,.pkgs{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.pg-hero h1{font-size:36px}.tiles,.partners,.pkgs,.contact-grid,.cform{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#bdbdbd;border-top:5px solid var(--red);padding:44px 0 26px;font-size:14px}
+.f-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;padding-bottom:30px;border-bottom:1px solid #262626}
+footer .logo .e{font-size:42px;color:#fff}footer .logo .n{font-size:14px;margin-right:18px}
+footer h4{color:#fff;font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+footer li{list-style:none;margin-bottom:8px}
+footer a:hover{color:#fff;text-decoration:underline}
+.f-bot{display:flex;justify-content:space-between;padding-top:20px;font-size:13px;color:#8a8a8a;flex-wrap:wrap;gap:10px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:12px 18px;border-left:4px solid var(--red);font-size:14px;transition:transform .25s;z-index:99}
+.toast.show{transform:translate(-50%,0)}
+.empty{padding:60px 0;text-align:center;color:var(--muted);font-size:18px}
+
+@media (max-width:1100px){.with-ad{grid-template-columns:1fr}.with-ad>aside{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}.ad-sticky{position:static;margin-top:0}.top{grid-template-columns:1fr 1fr}.lead{grid-column:1/-1}.grid4{grid-template-columns:repeat(2,1fr)}.vgrid{grid-template-columns:1fr 1fr}.vgrid .card:first-child{grid-column:1/-1}.news-cta{grid-template-columns:1fr}.f-top{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+  .wrap{padding:0 16px}.masthead .wrap{grid-template-columns:1fr;justify-items:center;gap:10px}.tagline,.mh-right,.utility .links{display:none}
+  .logo .e{font-size:44px}.logo .n{font-size:15px;margin-right:18px}
+  .top,.grid3,.split,.grid4,.vgrid{grid-template-columns:1fr}.lead .hl{font-size:28px}
+  .article h1{font-size:30px}.body p{font-size:17px}.news-cta{padding:24px}.news-cta input{width:100%}.news-cta form{flex-direction:column;gap:8px}
+  .f-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="utility"><div class="wrap">
+  <span id="today"></span>
+  <div class="links"><a href="#about">Бидний тухай</a><a href="#contact">Холбоо барих</a><a href="#advertise">Сурталчилгаа</a><span>☎ 94222201</span></div>
+</div></div>
+
+<header class="masthead"><div class="wrap">
+  <div class="tagline">Нэг товшилтоор дэлхийг мэд</div>
+  <a class="logo" href="#home" aria-label="Enter News нүүр"><span class="e">ENTER<i>.</i></span><span class="n">NEWS</span></a>
+  <div class="mh-right"><button class="btn btn-ghost" onclick="scrollToNews()">Мэдээллийн товхимол</button><a class="btn btn-red" href="#video">▶ Шууд</a></div>
+</div></header>
+
+<nav class="nav" id="nav"><div class="wrap">
+  <a class="mini" href="#home"><span class="e">ENTER<i>.</i></span></a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="search-btn" id="searchBtn" aria-label="Хайх"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+</div>
+<div class="searchbar" id="searchbar"><div class="wrap"><input id="q" placeholder="Мэдээ хайх… (Enter дарна уу)" autocomplete="off"></div></div>
+</nav>
+
+<div class="breaking"><div class="wrap"><b>ШУУРХАЙ</b><div class="tk"><span id="ticker"></span></div></div></div>
+
+<main><div class="wrap" id="app"></div></main>
+
+<footer><div class="wrap">
+  <div class="f-top">
+    <div>
+      <a class="logo" href="#home"><span class="e">ENTER<i>.</i></span><span class="n">NEWS</span></a>
+      <p style="margin-top:16px;max-width:300px">Монгол болон дэлхийн хамгийн чухал мэдээг хурдан, үнэн зөв, ойлгомжтой хүргэнэ.</p>
+    </div>
+    <div><h4>Ангилал</h4><ul id="fCats"></ul></div>
+    <div><h4>Enter News</h4><ul><li><a href="#about">Бидний тухай</a></li><li><a href="#contact">Холбоо барих</a></li><li><a href="#advertise">Сурталчилгаа · Хамтрагчид</a></li></ul></div>
+    <div><h4><a href="#contact">Холбоо барих</a></h4><ul><li>☎ 94222201</li><li>✉ development77779090@gmail.com</li><li>🌐 www.enternews.mn</li><li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+  </div>
+  <div class="f-bot"><span>© 2026 Enter News. Бүх эрх хуулиар хамгаалагдсан.</span><span>Мэдээ хуулбарлахдаа эх сурвалжийг заавал дурдана уу.</span></div>
+</div></footer>
+
+<div class="mini" id="mini" role="region" aria-label="Бичлэг">
+  <div class="mini-bar"><span class="lv" id="miniLabel">ОНЦЛОХ БИЧЛЭГ</span>
+    <button onclick="nextVideo()" title="Дараагийн бичлэг">⏭</button>
+    <button onclick="closeMini()" title="Хаах">✕</button></div>
+  <div class="player" id="player"></div>
+  <div class="mini-t"><span id="miniTitle"></span><small id="miniDur"></small></div>
+</div>
+<button class="mini-open" onclick="openMini()">▶ Бичлэг үзэх</button>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================
+   МЭДЭЭ — энд өөрийн мэдээгээ нэмж/сольж болно.
+   img: "assets/photos/xxx.jpg" гэж зураг заавал жинхэнэ зураг гарна.
+   Одоогийн бүх мэдээ ЖИШЭЭ.
+   ========================================================== */
+const CATS=[
+ {id:'politics',name:'Улс төр',     c:'#3b3bb3'},
+ {id:'economy', name:'Эдийн засаг', c:'#0f7a43'},
+ {id:'world',   name:'Дэлхий',      c:'#0b6bb5'},
+ {id:'society', name:'Нийгэм',      c:'#b5650b'},
+ {id:'tech',    name:'Технологи',   c:'#6a3bc4'},
+ {id:'sport',   name:'Спорт',       c:'#c4410b'},
+ {id:'culture', name:'Соёл',        c:'#b31f5c'},
+ {id:'video',   name:'Видео',       c:'#e41e26'}
+];
+const AUTHORS=['Б.Анударь','Г.Тэмүүлэн','Д.Номин','Э.Билгүүн','С.Уянга'];
+let N=[
+ {id:1,cat:'politics',live:true,title:'УИХ 2027 оны төсвийн төслийг хэлэлцэж эхэллээ',sub:'Нийгмийн салбарын зардал болон томоохон бүтээн байгуулалтын төслүүдийн санхүүжилт гол маргааны сэдэв боллоо.',time:'15 минутын өмнө',read:4},
+ {id:2,cat:'economy',title:'Нүүрсний экспорт оны эхний 10 сард өсөлттэй гарлаа',sub:'Гадаад валютын орлого нэмэгдэж, төгрөгийн ханшид эерэг нөлөө үзүүлнэ гэж шинжээчид үзэж байна.',time:'40 минутын өмнө',read:3},
+ {id:3,cat:'world',title:'Уур амьсгалын бага хурал: улс орнууд ялгарлаа бууруулах шинэ зорилт тавилаа',sub:'Монгол Улс цөлжилттэй тэмцэх туршлагаа олон улсад танилцуулав.',time:'1 цагийн өмнө',read:5},
+ {id:4,cat:'society',title:'Нийслэлд өвлийн бэлэн байдлыг дүүрэг бүрээр шалгаж байна',sub:'Дулаан, цахилгааны хангамж, авто замын цэвэрлэгээнд онцгой анхаарч байна.',time:'1 цагийн өмнө',read:3},
+ {id:5,cat:'sport',title:'Монгол бөхчүүд олон улсын тэмцээнээс алт, мөнгөн медаль хүртлээ',sub:'Тамирчдыг Чингис хаан нисэх буудал дээр хүндэтгэлтэйгээр угтлаа.',time:'2 цагийн өмнө',read:2},
+ {id:6,cat:'tech',title:'Хиймэл оюун ухааныг сургуулийн боловсролд туршин нэвтрүүлнэ',sub:'Багш нарт зориулсан сургалт ирэх сараас эхэлнэ.',time:'3 цагийн өмнө',read:4},
+ {id:7,cat:'society',title:'Тэрбум мод: энэ онд 120 сая мод тарьжээ',sub:'Аймгуудын дунд хамгийн их мод тарьсан гурван аймгийг тодрууллаа.',time:'3 цагийн өмнө',read:3},
+ {id:8,cat:'culture',title:'Улсын драмын театр шинэ улирлын нээлтээ хийнэ',sub:'Залуу найруулагчдын гурван бүтээл тайзнаа гарна.',time:'4 цагийн өмнө',read:2},
+ {id:9,cat:'world',title:'Азийн хөрөнгийн зах зээлүүд долоо хоногийг өсөлттэй эхлүүллээ',sub:'Технологийн компаниудын хувьцаа тэргүүлж байна.',time:'4 цагийн өмнө',read:3},
+ {id:10,cat:'economy',title:'Төв банк бодлогын хүүг хэвээр хадгаллаа',sub:'Инфляцын түвшин зорилтот хүрээнд ойртож байгааг онцлов.',time:'5 цагийн өмнө',read:4},
+ {id:11,cat:'economy',title:'Говийн бүсэд нарны цахилгаан станцын бүтээн байгуулалт эхэллээ',sub:'Станц ашиглалтад орсноор бүс нутгийн эрчим хүчний хангамж сайжирна.',time:'5 цагийн өмнө',read:3},
+ {id:12,cat:'sport',title:'Сагсан бөмбөгийн дээд лиг шинэ улирлаа эхлүүллээ',sub:'Энэ улиралд 10 баг аварга цолны төлөө өрсөлдөнө.',time:'6 цагийн өмнө',read:2},
+ {id:13,cat:'tech',title:'Монголын стартапууд олон улсын хөрөнгө оруулалт татлаа',sub:'Санхүүгийн технологи болон боловсролын платформууд тэргүүлэв.',time:'6 цагийн өмнө',read:3},
+ {id:14,cat:'politics',title:'Засгийн газар орон нутгийн хөгжлийн шинэ хөтөлбөр баталлаа',sub:'Хөтөлбөрийн хүрээнд аймгийн төвүүдэд дэд бүтэц сайжруулна.',time:'7 цагийн өмнө',read:4},
+ {id:15,cat:'video',title:'ВИДЕО: Өглөөний мэдээний тойм — өнөөдрийн гол 5 мэдээ',sub:'Өдрийн хамгийн чухал мэдээг 3 минутад багтаан хүргэж байна.',time:'2 цагийн өмнө',read:3,dur:'3:12'},
+ {id:16,cat:'video',title:'ВИДЕО: Улаанбаатарын түгжрэлийг хэрхэн бууруулах вэ?',sub:'Мэргэжилтнүүдийн санал.',time:'5 цагийн өмнө',read:6,dur:'6:40'},
+ {id:17,cat:'video',title:'ВИДЕО: Шилдэг агшнууд — бөхийн тэмцээн',sub:'Тэмцээний шилдэг мөчүүд.',time:'8 цагийн өмнө',read:2,dur:'2:05'},
+ {id:18,cat:'culture',title:'Монгол кино Ази тивийн наадамд шагнал хүртлээ',sub:'Шилдэг зураглаачийн шагналыг хүртэв.',time:'8 цагийн өмнө',read:3},
+ {id:19,cat:'society',title:'Эрүүл мэндийн төвүүд томуугийн вакцинжуулалт эхлүүллээ',sub:'Ахмад настан, хүүхдүүдэд үнэ төлбөргүй хийнэ.',time:'9 цагийн өмнө',read:2},
+ {id:20,cat:'world',title:'Европын холбоо эрчим хүчний шинэ стратеги танилцууллаа',sub:'Сэргээгдэх эрчим хүчний эзлэх хувийг нэмэгдүүлэх зорилттой.',time:'10 цагийн өмнө',read:4}
+];
+N.forEach((n,i)=>{n.author=AUTHORS[i%AUTHORS.length];n.views=Math.round(2000+((n.id*7919)%9000));});
+const OPINION=[
+ {name:'Д.Ганбат',role:'Эдийн засагч',t:'Төсвийн хэлэлцүүлэг иргэдэд илүү ил тод байх ёстой',c:'#3b3bb3'},
+ {name:'Н.Сарантуяа',role:'Боловсролын судлаач',t:'Хиймэл оюун ухаан багшийг орлохгүй, харин чөлөөлнө',c:'#6a3bc4'},
+ {name:'Б.Төгөлдөр',role:'Хот төлөвлөгч',t:'Түгжрэлийн шийдэл зам биш, нийтийн тээвэрт байна',c:'#0f7a43'}
+];
+
+/* ==========================================================
+   БИЧЛЭГ — сайт руу ороход шууд тоглох дэлгэц.
+   src:'assets/videos/xxx.mp4'  эсвэл  youtube:'VIDEO_ID'
+   (YouTube-ийн холбоосын v= -ийн дараах хэсэг)
+   ========================================================== */
+const VIDEOS=[
+ {title:'Enter News — Нэг товшилтоор дэлхийг мэд',src:'assets/videos/enternews-intro.mp4',poster:'assets/videos/enternews-intro.jpg',dur:'0:08',time:'Онцлох',label:'ОНЦЛОХ БИЧЛЭГ'},
+ {title:'Өглөөний мэдээний тойм — өнөөдрийн гол 5 мэдээ',dur:'3:12',time:'2 цагийн өмнө'},
+ {title:'Улаанбаатарын түгжрэлийг хэрхэн бууруулах вэ?',dur:'6:40',time:'5 цагийн өмнө'},
+ {title:'Шилдэг агшнууд — бөхийн тэмцээн',dur:'2:05',time:'8 цагийн өмнө'}
+];
+let vCur=0;
+function playerHTML(v){
+  if(v.youtube) return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(v.youtube)}?autoplay=1&mute=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(v.title)}"></iframe>`;
+  if(v.src) return `<video id="vplayer" src="${esc(v.src)}" ${v.poster?`poster="${esc(v.poster)}"`:''} autoplay muted loop playsinline controls></video>`;
+  return `<div class="empty-v"><div><b style="font-size:16px">Бичлэг удахгүй</b></div></div>`;
+}
+function videoHero(){
+  const v=VIDEOS[vCur];
+  return `<section class="vhero"><div class="vh-grid">
+   <div><div class="player" id="player">${playerHTML(v)}</div>
+     <div class="vh-info"><div class="kicker">Видео</div><h2 class="hl" id="vTitle">${esc(v.title)}</h2><div class="meta" id="vMeta"><span>${esc(v.time||'')}</span><span class="dot"></span><span>${esc(v.dur||'')}</span></div></div></div>
+   <div class="vlist"><h3>Бичлэгүүд <span>${VIDEOS.length}</span></h3>${VIDEOS.map((x,i)=>`<button class="vitem${i===vCur?' on':''}" onclick="playVideo(${i})"><div class="vthumb" style="${x.poster?`background-image:url('${esc(x.poster)}')`:'background:radial-gradient(circle at 80% 20%,#e41e2699,transparent 60%),#0b0b0b'}"><i>${esc(x.dur||'')}</i></div><div><b>${esc(x.title)}</b><small>${esc(x.time||'')}</small></div></button>`).join('')}</div>
+  </div></section>`;
+}
+const PLAYABLE=()=>VIDEOS.map((v,i)=>i).filter(i=>VIDEOS[i].src||VIDEOS[i].youtube);
+function playVideo(i){
+  vCur=i; const v=VIDEOS[i];
+  $('#player').innerHTML=playerHTML(v);
+  $('#miniTitle').textContent=v.title; $('#miniDur').textContent=v.dur||'';
+  $('#miniLabel').textContent=v.label||'БИЧЛЭГ';
+  $('#mini').classList.remove('hide');
+}
+function nextVideo(){const p=PLAYABLE(); if(p.length<2){toast('Дараагийн бичлэг одоогоор алга');return;} playVideo(p[(p.indexOf(vCur)+1)%p.length]);}
+function closeMini(){const v=$('#vplayer'); if(v)v.pause(); $('#mini').classList.add('hide');}
+function openMini(){$('#mini').classList.remove('hide'); const v=$('#vplayer'); if(v)v.play().catch(()=>{});}
+function toggleSound(){
+  const v=$('#vplayer'),b=$('#soundBtn'); if(!v)return;
+  v.muted=!v.muted; if(!v.muted){v.play().catch(()=>{});}
+  b.textContent=v.muted?'🔇 Дуу':'🔊 Дуу';
+}
+
+/* ==========================================================
+   СУРТАЛЧИЛГАА — энд захиалагчийн сурталчилгааг нэмнэ.
+   img:'assets/ads/xxx.jpg' (300×250) өгвөл зураг нь харагдана.
+   ========================================================== */
+const AD_MS=6000; // нэг сурталчилгаа харагдах хугацаа (мс)
+const ADS=[
+ {tag:'Сурталчилгаа байршуулах',title:'Энд таны сурталчилгаа',text:'Өдөр бүр мянга мянган уншигчид хүрнэ.',cta:'☎ 94222201',href:'#advertise',bg:'radial-gradient(circle at 80% 20%,#e41e26cc,transparent 55%),#0b0b0b'},
+ {tag:'Enter News',title:'Өглөөний тойм — өдөр бүр 08:00',text:'Өдрийн гол 5 мэдээг 3 минутад.',cta:'▶ Үзэх',href:'#video',bg:'linear-gradient(135deg,#0b0b0b 30%,#7a0d12)'},
+ {tag:'Жишээ сурталчилгаа',title:'Өвлийн их хямдрал −30%',text:'Захиалагчийн нэр, лого, зураг энд байрлана.',cta:'Дэлгэрэнгүй',href:'#advertise',bg:'radial-gradient(circle at 20% 20%,#0b6bb5aa,transparent 55%),#0b0b0b'},
+ {tag:'Enter News',title:'Мэдээлэл өгөх үү?',text:'Таны мэдээлэл бидэнд чухал.',cta:'✉ Холбогдох',href:'#contact',bg:'linear-gradient(135deg,#111 40%,#1d1d1d)'}
+];
+function adBox(start=0){
+  const order=ADS.map((_,i)=>ADS[(i+start)%ADS.length]);
+  return `<div class="ad-sticky"><div class="ad-label"><span>Сурталчилгаа</span><a href="#advertise">Байршуулах</a></div>
+   <div class="adbox" data-i="0" style="--ad-ms:${AD_MS}ms">
+    <div class="ad-dots">${order.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>
+    ${order.map((a,i)=>`<a class="ad-slide${i?'':' on'}" href="${esc(a.href||'#advertise')}" ${/^https?:/.test(a.href||'')?'target="_blank" rel="noopener sponsored"':''}>${a.img?`<img src="${esc(a.img)}" alt="${esc(a.title)}">`:`<div class="ad-bg" style="background:${a.bg}"></div><small>${esc(a.tag)}</small><strong>${esc(a.title)}</strong><span>${esc(a.text)}</span><em>${esc(a.cta)}</em>`}</a>`).join('')}
+   </div></div>`;
+}
+let adTimer;
+function startAds(){
+  clearInterval(adTimer);
+  adTimer=setInterval(()=>document.querySelectorAll('.adbox').forEach(box=>{
+    if(box.matches(':hover'))return;
+    const s=box.querySelectorAll('.ad-slide'),d=box.querySelectorAll('.ad-dots i');
+    let i=+box.dataset.i; s[i].classList.remove('on');d[i].classList.remove('on');
+    i=(i+1)%s.length; box.dataset.i=i; s[i].classList.add('on');
+    void d[i].offsetWidth; d[i].classList.add('on');
+  }),AD_MS);
+}
+const withAd=(html,n=1)=>`<div class="with-ad"><div>${html}</div><aside>${Array.from({length:n},(_,k)=>adBox(k*2)).join('')}</aside></div>`;
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cat=id=>CATS.find(c=>c.id===id)||{id,name:'Мэдээ',c:'#e41e26'};
+const by=c=>N.filter(n=>n.cat===c);
+function media(n,ratio){
+  const c=cat(n.cat), r=ratio?`style="aspect-ratio:${ratio}"`:'';
+  const inner=n.img?`<img src="${esc(n.img)}" alt="${esc(n.title)}" loading="lazy">`
+   :`<div class="ph" style="background:radial-gradient(circle at 85% 15%,${c.c}aa,transparent 55%),linear-gradient(135deg,#0b0b0b 35%,#1d1d1d)"></div><div class="wm">${esc(c.name)}</div><div class="mk"><span class="e">ENTER<i>.</i></span></div>`;
+  return `<div class="media" ${r}>${inner}${n.cat==='video'?`<span class="play">▶</span>`:''}</div>`;
+}
+const meta=n=>`<div class="meta">${n.live?'<span class="live">ШУУД</span><span class="dot"></span>':''}<span>${esc(n.time)}</span><span class="dot"></span><span>${esc(cat(n.cat).name)}</span>${n.dur?`<span class="dot"></span><span>${n.dur}</span>`:''}</div>`;
+const card=(n,opt={})=>`<a class="card" href="#news-${n.id}">${opt.noimg?'':media(n,opt.ratio)}${opt.noimg?'':''}<div class="kicker" style="margin-top:${opt.noimg?0:12}px">${esc(cat(n.cat).name)}</div><h3 class="hl">${esc(n.title)}</h3>${opt.sub?`<p>${esc(n.sub)}</p>`:''}${meta(n)}</a>`;
+
+/* ---------- views ---------- */
+function home(){
+  const lead=N[0], side=N.slice(1,3), list=N.slice(3,7);
+  const most=[...N].sort((a,b)=>b.views-a.views).slice(0,6);
+  const vids=by('video');
+  return `
+  <section class="top">
+    <a class="lead" href="#news-${lead.id}">${media(lead)}<div class="kicker" style="margin-top:16px">${esc(cat(lead.cat).name)}</div><h1 class="hl">${esc(lead.title)}</h1><p>${esc(lead.sub)}</p>${meta(lead)}</a>
+    <div class="col-stack">${side.map(n=>card(n,{sub:true})).join('')}</div>
+    <div class="col-stack">${list.map(n=>`<a class="list-item" href="#news-${n.id}"><div class="kicker">${esc(cat(n.cat).name)}</div><h3 class="hl">${esc(n.title)}</h3>${meta(n)}</a>`).join('')}</div>
+  </section>
+
+  <section class="sec"><div class="split">
+    <div>
+      <div class="sec-head"><h2>Улс төр</h2><a href="#politics">Бүгдийг үзэх →</a></div>
+      <div class="grid3">${[...by('politics'),...by('society')].slice(0,3).map(n=>card(n,{sub:true})).join('')}</div>
+      <div class="sec-head" style="margin-top:36px"><h2>Эдийн засаг</h2><a href="#economy">Бүгдийг үзэх →</a></div>
+      <div class="grid3">${[...by('economy'),...by('tech')].slice(0,3).map(n=>card(n,{sub:true})).join('')}</div>
+    </div>
+    <aside style="display:flex;flex-direction:column">${adBox()}<div class="most" style="margin-top:24px"><h3>Их уншсан</h3>${most.map(n=>`<a href="#news-${n.id}"><div><h4 class="hl">${esc(n.title)}</h4><div class="meta" style="margin-top:4px">${n.views.toLocaleString()} уншсан</div></div></a>`).join('')}</div>${adBox(2)}</aside>
+  </div></section>
+
+  <section class="video-band"><div class="wrap" style="padding:0">
+    <div class="sec-head"><h2 style="color:#fff">Видео</h2><a href="#video">Бүх видео →</a></div>
+    <div class="vgrid">${vids.map(n=>card(n,{sub:false})).join('')}</div>
+  </div></section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Дэлхий</h2><a href="#world">Бүгдийг үзэх →</a></div>
+    <div class="grid4">${by('world').concat(by('society')).slice(0,4).map(n=>card(n)).join('')}</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Байр суурь</h2><a href="#home">Бүгд →</a></div>
+    <div class="grid3">${OPINION.map(o=>`<div class="op"><div class="av" style="background:${o.c}">${esc(o.name.split('.')[1][0])}</div><div><div class="kicker">Нийтлэл</div><h3 class="hl">«${esc(o.t)}»</h3><b>${esc(o.name)}</b> <span class="meta" style="display:inline">· ${esc(o.role)}</span></div></div>`).join('')}</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Спорт · Соёл</h2><a href="#sport">Бүгдийг үзэх →</a></div>
+    <div class="grid4">${by('sport').concat(by('culture')).slice(0,4).map(n=>card(n)).join('')}</div>
+  </section>
+
+  <section class="news-cta" id="newsletter">
+    <a class="logo" href="#home"><span class="e" style="font-size:38px;color:#fff">ENTER<i>.</i></span><span class="n" style="font-size:13px;margin-right:16px">NEWS</span></a>
+    <div><h3>Өдрийн гол мэдээг имэйлээр аваарай</h3><p>Өглөө бүр 08:00 цагт хамгийн чухал 5 мэдээ.</p></div>
+    <form onsubmit="subscribe(event)"><input type="email" required placeholder="Таны имэйл хаяг"><button class="btn btn-red" style="height:46px">Бүртгүүлэх</button></form>
+  </section>`;
+}
+function category(id){
+  const c=cat(id), list=by(id);
+  if(!list.length) return `<div class="empty">Энэ ангилалд мэдээ алга.</div>`;
+  const [first,...rest]=list;
+  return withAd(`<div class="sec-head" style="margin-bottom:24px"><h2 style="font-size:34px">${esc(c.name)}</h2><span class="meta">${list.length} мэдээ</span></div>
+   <section class="top" style="grid-template-columns:2fr 1fr">
+     <a class="lead" href="#news-${first.id}">${media(first)}<h1 class="hl" style="margin-top:16px">${esc(first.title)}</h1><p>${esc(first.sub)}</p>${meta(first)}</a>
+     <div class="col-stack">${rest.slice(0,2).map(n=>card(n,{sub:true})).join('')}</div>
+   </section>
+   ${rest.length>2?`<section class="sec"><div class="grid3">${rest.slice(2).map(n=>card(n)).join('')}</div></section>`:''}`);
+}
+function article(id){
+  const n=N.find(x=>x.id===id); if(!n) return `<div class="empty">Мэдээ олдсонгүй. <a href="#home" style="color:var(--red)">Нүүр хуудас</a></div>`;
+  const c=cat(n.cat), rel=N.filter(x=>x.id!==n.id&&x.cat===n.cat).concat(N.filter(x=>x.cat!==n.cat)).slice(0,3);
+  return withAd(`<article class="article">
+    <div class="crumbs"><a href="#home">Нүүр</a> / <a href="#${c.id}">${esc(c.name)}</a></div>
+    ${n.live?'<span class="live">ШУУД ДАМЖУУЛАЛТ</span>':`<div class="kicker">${esc(c.name)}</div>`}
+    <h1>${esc(n.title)}</h1>
+    <p class="standfirst">${esc(n.sub)}</p>
+    <div class="byline"><img src="assets/logo.png" alt=""><div><b>${esc(n.author)}</b><div class="meta">${esc(n.time)} · ${n.read} минут унших</div></div>
+      <div class="share"><button onclick="copyLink(${n.id})" title="Facebook">f</button><button onclick="copyLink(${n.id})" title="X">𝕏</button><button onclick="copyLink(${n.id})" title="Холбоос хуулах">⧉</button></div></div>
+    ${media(n)}<div class="caption">Зураг: Enter News</div>
+    <div class="body">
+      <p>${esc(n.sub)} Энэ бол жишээ мэдээний бичвэр бөгөөд сайтыг ашиглалтад оруулахаас өмнө жинхэнэ мэдээгээр солигдоно.</p>
+      <p>Мэдээний үндсэн хэсэгт үйл явдлын дэлгэрэнгүй, холбогдох албан тушаалтан, мэргэжилтнүүдийн байр суурь, тоон мэдээлэл болон эх сурвалжийг тодорхой бичнэ. Догол мөр бүр нэг санааг илэрхийлж, уншигчид ойлгомжтой байхаар бүтэцлэнэ.</p>
+      <blockquote>«Нэг товшилтоор дэлхийг мэд» — Enter News</blockquote>
+      <p>Төгсгөлийн хэсэгт цаашид юу болох, иргэдэд ямар нөлөөтэй, ямар шийдвэр хүлээгдэж байгааг дүгнэж бичнэ. Энэ мэдээг Enter News цаашид үргэлжлүүлэн мэдээлэх болно.</p>
+    </div>
+    <div class="tags"><a href="#${c.id}">${esc(c.name)}</a><a href="#home">Enter News</a><a href="#home">Өнөөдөр</a></div>
+    <div class="related"><h3>Холбогдох мэдээ</h3><div class="grid3">${rel.map(x=>card(x)).join('')}</div></div>
+  </article>`,2);
+}
+/* ==========================================================
+   ХОЛБОО БАРИХ / ХАМТРАГЧ БАЙГУУЛЛАГУУД — эндээс засна
+   ========================================================== */
+const CONTACT={
+  phone:'94222201',
+  email:'development77779090@gmail.com',
+  web:'www.enternews.mn',
+  facebook:'https://www.facebook.com/',   // ← Enter News Facebook хуудасны холбоосоор солино
+  youtube:'https://www.youtube.com/',     // ← YouTube сувгийн холбоосоор солино
+  instagram:'',                            // байвал холбоосоо бичнэ
+  address:'Улаанбаатар хот',               // ← оффисын хаягаа бичнэ
+  hours:'Даваа–Баасан 09:00–18:00'         // ← ажлын цагаа бичнэ
+};
+// Хамтран ажилладаг байгууллагууд (ЖИШЭЭ — жинхэнэ мэдээллээр солино).
+// logo:'assets/partners/xxx.png' өгвөл лого нь харагдана.
+const PARTNERS=[
+ {name:'Хамтрагч байгууллага 1',type:'Мэдээллийн түнш',text:'Байгууллагын товч танилцуулга, хамтын ажиллагааны чиглэл.',url:''},
+ {name:'Хамтрагч байгууллага 2',type:'Сурталчилгааны захиалагч',text:'Байгууллагын товч танилцуулга, хамтын ажиллагааны чиглэл.',url:''},
+ {name:'Хамтрагч байгууллага 3',type:'Ивээн тэтгэгч',text:'Байгууллагын товч танилцуулга, хамтын ажиллагааны чиглэл.',url:''},
+ {name:'Хамтрагч байгууллага 4',type:'Контент түнш',text:'Байгууллагын товч танилцуулга, хамтын ажиллагааны чиглэл.',url:''}
+];
+function pgHero(id,title,text){
+  const t=[['about','Бидний тухай'],['contact','Холбоо барих'],['advertise','Сурталчилгаа']];
+  return `<section class="pg-hero"><div class="crumbs"><a href="#home">Нүүр</a> / ${esc(title)}</div><h1>${esc(title)}</h1><p>${text}</p>
+   <div class="pg-tabs">${t.map(([k,n])=>`<a href="#${k}" class="${k===id?'on':''}">${n}</a>`).join('')}</div></section>`;
+}
+function about(){
+  return pgHero('about','Бидний тухай','Enter News — Монгол болон дэлхийн хамгийн чухал мэдээг хурдан, үнэн зөв, ойлгомжтой хүргэх мэдээллийн сайт.')+`
+  <section class="pg-sec"><h2>Enter News гэж хэн бэ?</h2>
+    <p class="pg-lead">Enter News бол <b>«Нэг товшилтоор дэлхийг мэд»</b> гэсэн уриатай мэдээллийн сайт юм. Бид улс төр, эдийн засаг, нийгэм, технологи, спорт, соёлын мэдээг өдөр бүр шинэчилж, уншигчдадаа нэг дороос хүргэдэг.</p>
+    <p class="pg-lead">Мэдээ бүрийг эх сурвалжтай нь шалгаж, ойлгомжтой хэлээр, товч бөгөөд дэлгэрэнгүй хэлбэрээр бэлтгэнэ. Вэбсайт, Facebook хуудас, бичлэгийн контентоор дамжуулан уншигчидтайгаа өдөр бүр холбогдож байна.</p>
+  </section>
+  <section class="pg-sec"><h2>Бидний үнэт зүйлс</h2><div class="tiles">
+    <div class="tile"><div class="ic">⚡</div><h3>Хурдан</h3><p>Чухал үйл явдлыг цаг алдалгүй, шуурхай мэдээлнэ.</p></div>
+    <div class="tile"><div class="ic">✔</div><h3>Үнэн зөв</h3><p>Мэдээ бүрийг эх сурвалжаар нь шалгаж нийтэлнэ.</p></div>
+    <div class="tile"><div class="ic">◎</div><h3>Ойлгомжтой</h3><p>Нарийн сэдвийг энгийн, тодорхой хэлээр тайлбарлана.</p></div>
+    <div class="tile"><div class="ic">⚖</div><h3>Хараат бус</h3><p>Олон талын байр суурийг тэнцвэртэй харуулна.</p></div>
+  </div></section>
+  <section class="pg-sec"><h2>Бидний мэдээлдэг сэдвүүд</h2><div class="chips">${CATS.map(c=>`<a href="#${c.id}">${c.name}</a>`).join('')}</div></section>
+  <section class="pg-sec"><h2>Брэнд</h2><img src="assets/cover.jpg" alt="Enter News" style="width:100%;display:block"></section>
+  <div class="cta-band"><div><h3>Бидэнтэй хамтран ажиллах уу?</h3><p style="color:#555">Мэдээлэл өгөх, сурталчилгаа байршуулах, хамтран ажиллах санал.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-red" href="#contact">Холбоо барих</a><a class="btn" style="border:1px solid #111" href="#advertise">Сурталчилгаа</a></div></div>`;
+}
+function contact(){
+  const C=CONTACT, items=[
+   {ic:'☎',k:'Утас',v:C.phone,href:'tel:'+C.phone,s:C.hours},
+   {ic:'✉',k:'Имэйл',v:C.email,href:'mailto:'+C.email,s:'24 цагийн дотор хариу өгнө'},
+   {ic:'🌐',k:'Вэбсайт',v:C.web,href:'https://'+C.web,s:'Албан ёсны сайт'},
+   {ic:'f',k:'Facebook',v:'Enter News',href:C.facebook,s:'Мэдээ, шууд дамжуулалт'},
+   {ic:'▶',k:'YouTube',v:'Enter News',href:C.youtube,s:'Бичлэг, тойм'},
+   {ic:'⌖',k:'Хаяг',v:C.address,href:'',s:C.hours}
+  ];
+  if(C.instagram) items.splice(5,0,{ic:'◎',k:'Instagram',v:'Enter News',href:C.instagram,s:''});
+  return pgHero('contact','Холбоо барих','Мэдээлэл өгөх, санал хүсэлт, хамтын ажиллагааны асуудлаар бидэнтэй доорх сувгуудаар холбогдоорой.')+`
+  <section class="pg-sec"><h2>Бидэнтэй холбогдох</h2><div class="contact-grid">
+   ${items.map(i=>{const tag=i.href?'a':'div',ext=/^https?:/.test(i.href)?' target="_blank" rel="noopener"':'';return `<${tag} class="ccard" ${i.href?`href="${esc(i.href)}"${ext}`:''}><div class="ic">${i.ic}</div><div><small>${esc(i.k)}</small><b>${esc(i.v)}</b><span>${esc(i.s||'')}</span></div></${tag}>`;}).join('')}
+  </div></section>
+  <section class="pg-sec"><h2>Мессеж илгээх</h2>
+   <form class="cform" onsubmit="sendContact(event)">
+    <label>Нэр<input name="name" required placeholder="Таны нэр"></label>
+    <label>Утас эсвэл имэйл<input name="from" required placeholder="99xxxxxx / name@mail.com"></label>
+    <label class="full">Сэдэв<select name="topic"><option>Мэдээлэл өгөх</option><option>Сурталчилгаа байршуулах</option><option>Хамтран ажиллах санал</option><option>Санал, хүсэлт</option><option>Бусад</option></select></label>
+    <label class="full">Мессеж<textarea name="msg" required placeholder="Мессежээ энд бичнэ үү..."></textarea></label>
+    <div class="full"><button class="btn btn-red" style="height:48px;padding:0 28px">Илгээх</button>
+     <span class="meta" style="display:inline-flex;margin-left:12px">Таны имэйл програм нээгдэж, мессеж ${esc(C.email)} руу бэлэн болно.</span></div>
+   </form></section>`;
+}
+function advertise(){
+  return pgHero('advertise','Сурталчилгаа','Enter News-тэй хамтран ажилладаг байгууллагууд болон сурталчилгаа байршуулах боломжууд.')+`
+  <section class="pg-sec"><h2>Хамтран ажилладаг байгууллагууд</h2><div class="partners">
+   ${PARTNERS.map(p=>`<div class="partner"><div class="pl">${p.logo?`<img src="${esc(p.logo)}" alt="${esc(p.name)}">`:esc(p.name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase())}</div>
+     <div class="pb"><small>${esc(p.type)}</small><h3>${esc(p.name)}</h3><p>${esc(p.text)}</p>${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener">Вэбсайт →</a>`:''}</div></div>`).join('')}
+  </div></section>
+  <section class="pg-sec"><h2>Сурталчилгааны байршил</h2><div class="pkgs">
+   <div class="pkg"><div class="sz">300 × 250</div><h3>Хажуугийн дэлгэц</h3><p>Нүүр, ангилал, мэдээний хуудас бүрийн хажууд эргэлдэж харагдана.</p></div>
+   <div class="pkg"><div class="sz">БИЧЛЭГ</div><h3>Бичлэгийн дэлгэц</h3><p>Сайт руу ороход шууд тоглох жижиг бичлэгийн дэлгэцэнд байрлана.</p></div>
+   <div class="pkg"><div class="sz">PR НИЙТЛЭЛ</div><h3>Ивээн тэтгэсэн мэдээ</h3><p>Байгууллагын мэдээ, нийтлэлийг сайт болон Facebook-д нийтэлнэ.</p></div>
+   <div class="pkg"><div class="sz">FACEBOOK</div><h3>Сошиал пост</h3><p>Enter News-ийн Facebook хуудсаар брэндийн загвартай пост.</p></div>
+  </div></section>
+  <div class="cta-band"><div><h3>Сурталчилгаа байршуулах уу?</h3><p style="color:#555">Үнийн санал, нөхцөлийн талаар бидэнтэй холбогдоорой: ☎ ${esc(CONTACT.phone)} · ${esc(CONTACT.email)}</p></div>
+   <a class="btn btn-red" href="#contact">Холбогдох</a></div>`;
+}
+function sendContact(e){
+  e.preventDefault(); const f=new FormData(e.target);
+  const body=`Нэр: ${f.get('name')}\nХолбоо барих: ${f.get('from')}\n\n${f.get('msg')}`;
+  const url=`mailto:${CONTACT.email}?subject=${encodeURIComponent('[Enter News] '+f.get('topic'))}&body=${encodeURIComponent(body)}`;
+  try{location.href=url;}catch{}
+  toast('Имэйл програм нээгдэж байна. Нээгдэхгүй бол '+CONTACT.email+' руу шууд бичнэ үү.');
+}
+function search(q){
+  const s=q.toLowerCase(), r=N.filter(n=>(n.title+' '+n.sub).toLowerCase().includes(s));
+  return withAd(`<div class="sec-head"><h2>«${esc(q)}» — ${r.length} үр дүн</h2></div>${r.length?`<div class="grid3">${r.map(n=>card(n)).join('')}</div>`:'<div class="empty">Тохирох мэдээ олдсонгүй.</div>'}`);
+}
+
+/* ---------- router (#home, #politics, #news-3, #about) ---------- */
+let query='';
+function route(){
+  const h=location.hash.slice(1)||'home';
+  let html;
+  if(query) html=search(query);
+  else if(h.startsWith('news-')) html=article(+h.slice(5));
+  else if(h==='about') html=about();
+  else if(h==='contact') html=contact();
+  else if(h==='advertise') html=advertise();
+  else if(CATS.some(c=>c.id===h)) html=category(h);
+  else html=home();
+  $('#app').innerHTML=html;startAds();
+  document.querySelectorAll('#navLinks a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+h||(h==='home'&&a.getAttribute('href')==='#home')));
+  const n=h.startsWith('news-')&&N.find(x=>x.id===+h.slice(5));
+  const PT={about:'Бидний тухай',contact:'Холбоо барих',advertise:'Сурталчилгаа'};
+  document.title=n?n.title+' — Enter News':PT[h]?PT[h]+' — Enter News':'Enter News — Нэг товшилтоор дэлхийг мэд';
+}
+function go(){query='';$('#q').value='';route();window.scrollTo(0,0);}
+window.addEventListener('hashchange',go);
+
+/* ---------- actions ---------- */
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2400);}
+async function copyLink(id){const u='https://www.enternews.mn/#news-'+id;try{await navigator.clipboard.writeText(u);toast('Холбоос хуулагдлаа');}catch{toast(u);}}
+function subscribe(e){e.preventDefault();e.target.reset();toast('Баярлалаа! Бүртгэл амжилттай (жишээ)');}
+function scrollToNews(){if(location.hash&&location.hash!=='#home'){location.hash='home';setTimeout(scrollToNews,50);return;}$('#newsletter')?.scrollIntoView({behavior:'smooth'});}
+
+/* ---------- init ---------- */
+$('#navLinks').innerHTML=`<a href="#home">Нүүр</a>`+CATS.map(c=>`<a href="#${c.id}">${c.name}</a>`).join('');
+$('#fCats').innerHTML=CATS.map(c=>`<li><a href="#${c.id}">${c.name}</a></li>`).join('');
+$('#ticker').innerHTML=N.slice(0,6).map(n=>`<em>${esc(n.title)}</em>`).join('');
+(()=>{const d=new Date(),W=['Ням','Даваа','Мягмар','Лхагва','Пүрэв','Баасан','Бямба'];$('#today').textContent=`${d.getFullYear()} оны ${d.getMonth()+1}-р сарын ${d.getDate()}, ${W[d.getDay()]} гараг`;})();
+$('#searchBtn').onclick=()=>{$('#searchbar').classList.toggle('open');$('#q').focus();};
+$('#q').addEventListener('keydown',e=>{if(e.key==='Enter'){query=e.target.value.trim();route();window.scrollTo(0,0);}if(e.key==='Escape'){$('#searchbar').classList.remove('open');}});
+new IntersectionObserver(([e])=>$('#nav').classList.toggle('stuck',!e.isIntersecting)).observe(document.querySelector('.masthead'));
+route();
+playVideo(PLAYABLE()[0]??0);
+</script>
+</body>
+</html>
