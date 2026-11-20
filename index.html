@@ -371,6 +371,19 @@ const CATS=[
  {id:'video',   name:'Видео',       c:'#e41e26'}
 ];
 const AUTHORS=['Б.Анударь','Г.Тэмүүлэн','Д.Номин','Э.Билгүүн','С.Уянга'];
+/* ===== МЭДЭЭ НЭМЭХ: доорх загварыг хуулж "let N=[" мөрийн доор буулгана (хамгийн дээрх нь нүүрэнд том гарна) =====
+ {id:21, cat:'society', time:'Өнөөдөр 13:00', read:3,
+  title:'Мэдээний гарчиг',
+  sub:'Товч агуулга — нэг өгүүлбэр',
+  img:'assets/photos/medee21.jpg',          // зураг (заавал биш)
+  caption:'Зураг: Enter News',              // зургийн тайлбар (заавал биш)
+  author:'Таны нэр',                        // сэтгүүлч (заавал биш)
+  body:`Эхний догол мөр.
+
+Хоёр дахь догол мөр. Догол мөр бүрийн хооронд нэг хоосон мөр үлдээнэ.
+
+«Ингэж эхэлсэн догол мөр ишлэл болж харагдана» — Хэн нэгэн`},
+==================================================================================================== */
 let N=[
  {id:1,cat:'politics',live:true,title:'УИХ 2027 оны төсвийн төслийг хэлэлцэж эхэллээ',sub:'Нийгмийн салбарын зардал болон томоохон бүтээн байгуулалтын төслүүдийн санхүүжилт гол маргааны сэдэв боллоо.',time:'15 минутын өмнө',read:4},
  {id:2,cat:'economy',title:'Нүүрсний экспорт оны эхний 10 сард өсөлттэй гарлаа',sub:'Гадаад валютын орлого нэмэгдэж, төгрөгийн ханшид эерэг нөлөө үзүүлнэ гэж шинжээчид үзэж байна.',time:'40 минутын өмнө',read:3},
@@ -393,7 +406,7 @@ let N=[
  {id:19,cat:'society',title:'Эрүүл мэндийн төвүүд томуугийн вакцинжуулалт эхлүүллээ',sub:'Ахмад настан, хүүхдүүдэд үнэ төлбөргүй хийнэ.',time:'9 цагийн өмнө',read:2},
  {id:20,cat:'world',title:'Европын холбоо эрчим хүчний шинэ стратеги танилцууллаа',sub:'Сэргээгдэх эрчим хүчний эзлэх хувийг нэмэгдүүлэх зорилттой.',time:'10 цагийн өмнө',read:4}
 ];
-N.forEach((n,i)=>{n.author=AUTHORS[i%AUTHORS.length];n.views=Math.round(2000+((n.id*7919)%9000));});
+N.forEach((n,i)=>{n.author=n.author||AUTHORS[i%AUTHORS.length];n.views=Math.round(2000+((n.id*7919)%9000));});
 const OPINION=[
  {name:'Д.Ганбат',role:'Эдийн засагч',t:'Төсвийн хэлэлцүүлэг иргэдэд илүү ил тод байх ёстой',c:'#3b3bb3'},
  {name:'Н.Сарантуяа',role:'Боловсролын судлаач',t:'Хиймэл оюун ухаан багшийг орлохгүй, харин чөлөөлнө',c:'#6a3bc4'},
@@ -547,6 +560,8 @@ function category(id){
    </section>
    ${rest.length>2?`<section class="sec"><div class="grid3">${rest.slice(2).map(n=>card(n)).join('')}</div></section>`:''}`);
 }
+/* Мэдээний дэлгэрэнгүй бичвэр: хоосон мөрөөр догол мөр тусгаарлана, «...» -ээр эхэлсэн догол мөр ишлэл болно */
+const bodyHTML=t=>String(t).trim().split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>p.startsWith('«')?`<blockquote>${esc(p)}</blockquote>`:`<p>${esc(p).replace(/\n/g,'<br>')}</p>`).join('');
 function article(id){
   const n=N.find(x=>x.id===id); if(!n) return `<div class="empty">Мэдээ олдсонгүй. <a href="#home" style="color:var(--red)">Нүүр хуудас</a></div>`;
   const c=cat(n.cat), rel=N.filter(x=>x.id!==n.id&&x.cat===n.cat).concat(N.filter(x=>x.cat!==n.cat)).slice(0,3);
@@ -557,12 +572,12 @@ function article(id){
     <p class="standfirst">${esc(n.sub)}</p>
     <div class="byline"><img src="assets/logo.png" alt=""><div><b>${esc(n.author)}</b><div class="meta">${esc(n.time)} · ${n.read} минут унших</div></div>
       <div class="share"><button onclick="copyLink(${n.id})" title="Facebook">f</button><button onclick="copyLink(${n.id})" title="X">𝕏</button><button onclick="copyLink(${n.id})" title="Холбоос хуулах">⧉</button></div></div>
-    ${media(n)}<div class="caption">Зураг: Enter News</div>
+    ${media(n)}<div class="caption">${esc(n.caption||'Зураг: Enter News')}</div>
     <div class="body">
-      <p>${esc(n.sub)} Энэ бол жишээ мэдээний бичвэр бөгөөд сайтыг ашиглалтад оруулахаас өмнө жинхэнэ мэдээгээр солигдоно.</p>
+      ${n.body?bodyHTML(n.body):`<p>${esc(n.sub)} Энэ бол жишээ мэдээний бичвэр бөгөөд сайтыг ашиглалтад оруулахаас өмнө жинхэнэ мэдээгээр солигдоно.</p>
       <p>Мэдээний үндсэн хэсэгт үйл явдлын дэлгэрэнгүй, холбогдох албан тушаалтан, мэргэжилтнүүдийн байр суурь, тоон мэдээлэл болон эх сурвалжийг тодорхой бичнэ. Догол мөр бүр нэг санааг илэрхийлж, уншигчид ойлгомжтой байхаар бүтэцлэнэ.</p>
       <blockquote>«Нэг товшилтоор дэлхийг мэд» — Enter News</blockquote>
-      <p>Төгсгөлийн хэсэгт цаашид юу болох, иргэдэд ямар нөлөөтэй, ямар шийдвэр хүлээгдэж байгааг дүгнэж бичнэ. Энэ мэдээг Enter News цаашид үргэлжлүүлэн мэдээлэх болно.</p>
+      <p>Төгсгөлийн хэсэгт цаашид юу болох, иргэдэд ямар нөлөөтэй, ямар шийдвэр хүлээгдэж байгааг дүгнэж бичнэ. Энэ мэдээг Enter News цаашид үргэлжлүүлэн мэдээлэх болно.</p>`}
     </div>
     <div class="tags"><a href="#${c.id}">${esc(c.name)}</a><a href="#home">Enter News</a><a href="#home">Өнөөдөр</a></div>
     <div class="related"><h3>Холбогдох мэдээ</h3><div class="grid3">${rel.map(x=>card(x)).join('')}</div></div>
