@@ -307,6 +307,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 }
 .article .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:24px 0}.article .gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:6px;display:block}
 .media.tall img{object-position:center 15%}.article .media.tall{aspect-ratio:4/5;max-width:620px;margin-left:auto;margin-right:auto}.article .media.tall img{object-position:center top}
+.article .fbv{position:relative;width:100%;max-width:420px;margin:0 auto 8px;background:#000;border-radius:6px;overflow:hidden}.article .fbv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 </head>
 <body>
@@ -389,7 +390,7 @@ const AUTHORS=['Б.Анударь','Г.Тэмүүлэн','Д.Номин','Э.Б�
 «Ингэж эхэлсэн догол мөр ишлэл болж харагдана» — Хэн нэгэн`},
 ==================================================================================================== */
 let N=[
- {id:21,cat:'politics',time:'2026.11.20',read:3,author:'Enter News',
+ {id:21,cat:'politics',fbvideo:'1111496594983319',vr:'9/16',time:'2026.11.20',read:3,author:'Enter News',
   title:'Монгол Улсын зургаа дахь Ерөнхийлөгч У.Хүрэлсүхийг хүндэтгэн үдэв',
   sub:'Бүрэн эрхийн хугацаа дуусахаас өмнө өөрийн хүсэлтээр ажлаа хүлээлгэн өгсөн Ерөнхийлөгч У.Хүрэлсүхийг өнөөдөр Сүхбаатарын талбайд төрийн ёслолоор үдлээ.',
   img:'assets/photos/khurelsukh-1.jpg',
@@ -423,7 +424,7 @@ let N=[
 «Хийсэн бүтээсэн бүхэн цаг хугацааны шалгуураар үнэлэгддэг. Түүхийн хуудас эргэхэд хэн юу ярьж байснаас илүүтэй, улс орныхоо төлөө юу хийж, ямар ул мөр үлдээснийг цаг хугацаа шүүнэ.»
 
 Б.Бадамцэцэг Ерөнхийлөгч У.Хүрэлсүхэд талархал илэрхийлж, «Албан тушаал өөрчлөгдөж болно. Харин эх орныхоо төлөө зориулсан сэтгэл зүтгэл, ёс зүй, үлдээсэн сайн жишиг тань цаг хугацаанд үлдэн үргэлжлэг» гэсэн байна.`},
- {id:102,cat:'society',time:'2026.11.20 12:37',read:2,author:'Enter News',tall:true,
+ {id:102,cat:'society',fbvideo:'1038696005913550',vr:'4/5',time:'2026.11.20 12:37',read:2,author:'Enter News',tall:true,
   title:'Л.Энх-Амгалан: Нууцаар морь уралдана гэдэг нь хамгийн их эрсдэл дагуулна',
   sub:'Боловсролын сайд Л.Энх-Амгалан хаврын морин уралдааныг хууль, журмаар зохицуулахгүй бол далд уралдаан хүүхдийн аюулгүй байдлыг эрсдэлд оруулж байна гэв.',
   img:'assets/photos/fb-2.jpg',
@@ -502,7 +503,7 @@ let N=[
 Сангийн сайд асан Б.Жавхлангийн нэр МАН-аас Ерөнхийлөгчид өрсөлдөж болзошгүй улстөрчдийн тоонд хэвлэл мэдээллээр яригдаж ирсэн. Тэрбээр 2024 онд Ерөнхийлөгчийн Иргэний нийгмийн бодлого, төсөл хөтөлбөрийн зохицуулалт хариуцсан зөвлөхөөр ажиллаж байжээ.
 
 Хуулиар УИХ-д суудалтай нам, эвсэл дангаараа буюу хамтран Ерөнхийлөгчид тус бүр нэг хүний нэр дэвшүүлдэг. Ерөнхийлөгчийн сонгуулийн товыг арванхоёрдугаар сарын 20-ноос өмнө тогтоохоор төлөвлөж байна.`},
- {id:111,cat:'politics',time:'2026.11.19 18:10',read:2,author:'Enter News',tall:true,
+ {id:111,cat:'politics',fbvideo:'4507866399504196',vr:'4/5',time:'2026.11.19 18:10',read:2,author:'Enter News',tall:true,
   title:'Н.Учрал: Улс төрчид халдашгүй байдлын ард нуугдаж, шантаажилдаг байдлаасаа салах ёстой',
   sub:'Ерөнхий сайд Н.Учрал улс төрчид халдашгүй эрхээ халхавч болгох явдлыг таслан зогсоох ёстой гэж мэдэгдлээ.',
   img:'assets/photos/fb-11.jpg',
@@ -522,7 +523,7 @@ let N=[
 Энэхүү хамтын ажиллагаа нь спорт болон тансаг зэрэглэлийн автомашины салбарын хоёр том брэндийг холбож буйгаараа онцлог юм.
 
 Гэрээний хүрээнд 2026–2027 болон 2027–2028 оны улирлуудад хоёр байгууллага хамтран ажиллах бөгөөд Bentley Motors нь ПСЖ-ийн эрэгтэй үндсэн багийн тансаг зэрэглэлийн автомашины албан ёсны түнш болжээ.`},
- {id:113,cat:'tech',time:'2026.11.19 17:44',read:2,author:'Enter News',tall:true,
+ {id:113,cat:'tech',fbvideo:'1665047255266200',vr:'4/5',time:'2026.11.19 17:44',read:2,author:'Enter News',tall:true,
   title:'Финландын 8 жилийн судалгаа: Дэлгэцийн хэрэглээ ихтэй хүүхдүүд сэтгэн бодох чадварын сорилд илүү үр дүн үзүүлжээ',
   sub:'Йювяскюля болон Зүүн Финландын их сургуулийн PANIC судалгаанд 260 хүүхэд хамрагджээ.',
   img:'assets/photos/fb-13.jpg',
@@ -553,7 +554,7 @@ let N=[
 Санал хураалтын өмнө хэлсэн үгэндээ тэрбээр бүрэн эрхийнхээ хугацаанд хийсэн ажлаа товч дүгнэж, эв нэгдэлтэй байхыг уриалсан байна.
 
 УИХ уг өдрийн хуралдаанаараа хуралдаанд оролцсон 104 гишүүний 96-ийн саналаар У.Хүрэлсүхийг Ерөнхийлөгчийн үүрэгт ажлаас чөлөөлсөн.`},
- {id:116,cat:'world',time:'2026.11.19 15:16',read:2,author:'Enter News',tall:true,
+ {id:116,cat:'world',fbvideo:'5563523727121635',vr:'4/5',time:'2026.11.19 15:16',read:2,author:'Enter News',tall:true,
   title:'Хэдэн сая улаан хавч нүүдэллэж эхэллээ',
   sub:'Австралийн Зул сарын арал дээр жил бүр болдог улаан хавчны их нүүдэл эхэлжээ.',
   img:'assets/photos/fb-16.jpg',
@@ -564,7 +565,7 @@ let N=[
 Хавчийг хамгаалахын тулд арал дээрх хэд хэдэн замыг түр хааж, тусгай «хавчны гүүр» байгуулсан байдаг. Сүүлийн таван жилд улаан хавчны тоо 50 саяас 100 гаруй сая болж хоёр дахин өссөн бөгөөд тэдний хамгийн том аюул болох түрэмгий шар шоргоолжтой тэмцэх ажлыг үргэлжлүүлж байна.
 
 Энэхүү нүүдэл нь арлын хамгийн том жуулчны татах хүчин зүйл бөгөөд жил бүр дэлхийн өнцөг булан бүрээс байгаль сонирхогчид ирдэг.`},
- {id:117,cat:'world',time:'2026.11.19 15:03',read:2,author:'Enter News',tall:true,
+ {id:117,cat:'world',fbvideo:'2025192061510767',vr:'4/5',time:'2026.11.19 15:03',read:2,author:'Enter News',tall:true,
   title:'Эстонид «ганц эвэрт» бор гөрөөс камерт бичигдлээ',
   sub:'Эстонийн Сааремаа арлын зэрлэг амьтны камер духан дээрээ ганц эвэр мэт ургацтай бор гөрөөсийг бичиж авчээ.',
   img:'assets/photos/fb-17.jpg',
@@ -575,7 +576,7 @@ let N=[
 Мэргэжилтнүүд бичлэгээс уг ургацыг юу болохыг тодорхойлж чадаагүй ч дунд хэсэгтээ ургасан эвэр эсвэл илүү чих шиг харагдаж байна гэжээ.
 
 Мөн уг камер ойн гүнд үүрлэдэг ховор хар өрөвтас шувууг ч бичиж авсан байна.`},
- {id:118,cat:'world',time:'2026.11.19 14:51',read:2,author:'Enter News',tall:true,
+ {id:118,cat:'world',fbvideo:'1859073045118328',vr:'4/5',time:'2026.11.19 14:51',read:2,author:'Enter News',tall:true,
   title:'Ши Жиньпин, Д.Трамп нарын уулзалт ердөө 13 минут үргэлжлээд өндөрлөлөө',
   sub:'АПЕК-ийн дээд хэмжээний уулзалтын үеэр Шэньжэнь хотод АНУ, БНХАУ-ын удирдагчид хоёр талын уулзалт хийлээ.',
   img:'assets/photos/fb-18.jpg',
@@ -672,7 +673,7 @@ let N=[
 Төслийн хүрээнд гэр хорооллын айл өрхийн халаалтад дулаан хуримтлуулах технологи нэвтрүүлж, яндангийн тоог 7–10 мянгаар бууруулахаар төлөвлөжээ. Төслийг НҮБ-ын Хүүхдийн сантай хамтран хэрэгжүүлэх юм.
 
 Мөн НҮБ-ын Хөгжлийн хөтөлбөртэй хамтран батарей хуримтлуурын системтэй хосолсон нарны цахилгаан станц байгуулахаар төлөвлөж байна.`},
- {id:127,cat:'tech',time:'2026.11.19 11:47',read:2,author:'Enter News',tall:true,
+ {id:127,cat:'tech',fbvideo:'928910880186209',vr:'9/16',time:'2026.11.19 11:47',read:2,author:'Enter News',tall:true,
   title:'Сугар гараг дээрх нэг өдөр нь нэг жилээсээ урт!',
   sub:'Сугар гараг тэнхлэгээ нэг эргэхэд 243, Нарыг нэг тойроход 225 дэлхийн хоног зарцуулдаг.',
   img:'assets/photos/fb-27.jpg',
@@ -720,7 +721,7 @@ let N=[
 Шинэчлэл: Хуралдаанд оролцсон 104 гишүүний 96 нь дэмжиж, У.Хүрэлсүхийг Ерөнхийлөгчийн үүрэгт ажлаас чөлөөлөх шийдвэр гаргалаа.
 
 Ийнхүү Монгол Улсын түүхэнд бүрэн эрхийн хугацаа дуусахаас өмнө ажлаа хүлээлгэн өгсөн анхны Ерөнхийлөгч боллоо. У.Хүрэлсүх ажлаа хүлээлгэн өгөх шийдвэрээ 11 дүгээр сарын 17-нд зарласан юм.`},
- {id:131,cat:'politics',time:'2026.11.18 21:03',read:3,author:'Enter News',
+ {id:131,cat:'politics',fbvideo:'1811531516633092',vr:'9/16',time:'2026.11.18 21:03',read:3,author:'Enter News',
   title:'ШУУРХАЙ | Ерөнхийлөгч У.Хүрэлсүх огцрохоо мэдэгдлээ',
   sub:'Монгол Улсын Ерөнхийлөгч У.Хүрэлсүх 11 дүгээр сарын 17-нд Төрийн ордонд хэвлэлийн бага хурал хийж, албан тушаалаасаа огцрох шийдвэрээ зарлалаа.',
   img:'assets/photos/khurelsukh-1.jpg',
@@ -861,7 +862,7 @@ function media(n,ratio){
   const c=cat(n.cat), r=ratio?`style="aspect-ratio:${ratio}"`:'';
   const inner=n.img?`<img src="${esc(n.img)}" alt="${esc(n.title)}" loading="lazy">`
    :`<div class="ph" style="background:radial-gradient(circle at 85% 15%,${c.c}aa,transparent 55%),linear-gradient(135deg,#0b0b0b 35%,#1d1d1d)"></div><div class="wm">${esc(c.name)}</div><div class="mk"><span class="e">ENTER<i>.</i></span></div>`;
-  return `<div class="media${n.tall?' tall':''}" ${r}>${inner}${n.cat==='video'?`<span class="play">▶</span>`:''}</div>`;
+  return `<div class="media${n.tall?' tall':''}" ${r}>${inner}${(n.cat==='video'||n.fbvideo)?`<span class="play">▶</span>`:''}</div>`;
 }
 const meta=n=>`<div class="meta">${n.live?'<span class="live">ШУУД</span><span class="dot"></span>':''}<span>${esc(n.time)}</span><span class="dot"></span><span>${esc(cat(n.cat).name)}</span>${n.dur?`<span class="dot"></span><span>${n.dur}</span>`:''}</div>`;
 const card=(n,opt={})=>`<a class="card" href="#news-${n.id}">${opt.noimg?'':media(n,opt.ratio)}${opt.noimg?'':''}<div class="kicker" style="margin-top:${opt.noimg?0:12}px">${esc(cat(n.cat).name)}</div><h3 class="hl">${esc(n.title)}</h3>${opt.sub?`<p>${esc(n.sub)}</p>`:''}${meta(n)}</a>`;
@@ -927,6 +928,8 @@ function category(id){
 }
 /* Мэдээний дэлгэрэнгүй бичвэр: хоосон мөрөөр догол мөр тусгаарлана, «...» -ээр эхэлсэн догол мөр ишлэл болно */
 const bodyHTML=t=>String(t).trim().split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>p.startsWith('«')?`<blockquote>${esc(p)}</blockquote>`:`<p>${esc(p).replace(/\n/g,'<br>')}</p>`).join('');
+/* Facebook бичлэг: fbvideo:'ID', vr:'4/5' эсвэл '9/16' */
+const fbVideo=n=>`<div class="fbv" style="aspect-ratio:${n.vr||'9/16'}"><iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent('https://www.facebook.com/reel/'+n.fbvideo)}&show_text=false&t=0" title="${esc(n.title)}" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" loading="lazy" scrolling="no" frameborder="0"></iframe></div>`;
 function article(id){
   const n=N.find(x=>x.id===id); if(!n) return `<div class="empty">Мэдээ олдсонгүй. <a href="#home" style="color:var(--red)">Нүүр хуудас</a></div>`;
   const c=cat(n.cat), rel=N.filter(x=>x.id!==n.id&&x.cat===n.cat).concat(N.filter(x=>x.cat!==n.cat)).slice(0,3);
@@ -937,7 +940,7 @@ function article(id){
     <p class="standfirst">${esc(n.sub)}</p>
     <div class="byline"><img src="assets/logo.svg" alt="Enter News"><div><b>${esc(n.author)}</b><div class="meta">${esc(n.time)} · ${n.read} минут унших</div></div>
       <div class="share"><button onclick="copyLink(${n.id})" title="Facebook">f</button><button onclick="copyLink(${n.id})" title="X">𝕏</button><button onclick="copyLink(${n.id})" title="Холбоос хуулах">⧉</button></div></div>
-    ${media(n)}<div class="caption">${esc(n.caption||'Зураг: Enter News')}</div>
+    ${n.fbvideo?fbVideo(n):media(n)}<div class="caption">${esc(n.fbvideo?'Бичлэг: Enter News':(n.caption||'Зураг: Enter News'))}</div>
     <div class="body">
       ${n.body?bodyHTML(n.body):`<p>${esc(n.sub)} Энэ бол жишээ мэдээний бичвэр бөгөөд сайтыг ашиглалтад оруулахаас өмнө жинхэнэ мэдээгээр солигдоно.</p>
       <p>Мэдээний үндсэн хэсэгт үйл явдлын дэлгэрэнгүй, холбогдох албан тушаалтан, мэргэжилтнүүдийн байр суурь, тоон мэдээлэл болон эх сурвалжийг тодорхой бичнэ. Догол мөр бүр нэг санааг илэрхийлж, уншигчид ойлгомжтой байхаар бүтэцлэнэ.</p>
