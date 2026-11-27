@@ -215,9 +215,9 @@ aside>.ad-sticky:last-child{position:sticky;top:66px}
 .adbox{position:relative;width:300px;max-width:100%;aspect-ratio:300/250;overflow:hidden;background:#0b0b0b;border:1px solid #1f1f1f;border-top:4px solid var(--red)}
 .ad-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff;text-decoration:none}
 .ad-slide.on{opacity:1;z-index:1}
-.ad-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ad-slide img,.ad-slide video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b0b0b}
 .ad-slide .ad-bg{position:absolute;inset:0}
-.ad-slide>*:not(.ad-bg):not(img){position:relative}
+.ad-slide>*:not(.ad-bg):not(img):not(video){position:relative}
 .ad-slide small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ffb3b6;font-weight:700}
 .ad-slide strong{font-size:23px;font-weight:900;line-height:1.15;margin:6px 0 6px;letter-spacing:-.01em}
 .ad-slide span{font-size:13.5px;color:#d0d0d0}
@@ -824,9 +824,11 @@ function toggleSound(){
 /* ==========================================================
    СУРТАЛЧИЛГАА — энд захиалагчийн сурталчилгааг нэмнэ.
    img:'assets/ads/xxx.jpg' (300×250) өгвөл зураг нь харагдана.
+   video:'assets/videos/xxx.mp4' өгвөл бичлэг тоглоно (дуугүй, давтагдана).
    ========================================================== */
 const AD_MS=6000; // нэг сурталчилгаа харагдах хугацаа (мс)
 const ADS=[
+ {tag:'Enter News',title:'Enter News — Нэг товшилтоор дэлхийг мэд',video:'assets/videos/enternews-intro.mp4',poster:'assets/videos/enternews-intro.jpg',href:'#video'},
  {tag:'Сурталчилгаа байршуулах',title:'Энд таны сурталчилгаа',text:'Өдөр бүр мянга мянган уншигчид хүрнэ.',cta:'☎ 94222201',href:'#advertise',bg:'radial-gradient(circle at 80% 20%,#e41e26cc,transparent 55%),#0b0b0b'},
  {tag:'Enter News',title:'Өглөөний тойм — өдөр бүр 08:00',text:'Өдрийн гол 5 мэдээг 3 минутад.',cta:'▶ Үзэх',href:'#video',bg:'linear-gradient(135deg,#0b0b0b 30%,#7a0d12)'},
  {tag:'Жишээ сурталчилгаа',title:'Өвлийн их хямдрал −30%',text:'Захиалагчийн нэр, лого, зураг энд байрлана.',cta:'Дэлгэрэнгүй',href:'#advertise',bg:'radial-gradient(circle at 20% 20%,#0b6bb5aa,transparent 55%),#0b0b0b'},
@@ -837,7 +839,7 @@ function adBox(start=0){
   return `<div class="ad-sticky"><div class="ad-label"><span>Сурталчилгаа</span><a href="#advertise">Байршуулах</a></div>
    <div class="adbox" data-i="0" style="--ad-ms:${AD_MS}ms">
     <div class="ad-dots">${order.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>
-    ${order.map((a,i)=>`<a class="ad-slide${i?'':' on'}" href="${esc(a.href||'#advertise')}" ${/^https?:/.test(a.href||'')?'target="_blank" rel="noopener sponsored"':''}>${a.img?`<img src="${esc(a.img)}" alt="${esc(a.title)}">`:`<div class="ad-bg" style="background:${a.bg}"></div><small>${esc(a.tag)}</small><strong>${esc(a.title)}</strong><span>${esc(a.text)}</span><em>${esc(a.cta)}</em>`}</a>`).join('')}
+    ${order.map((a,i)=>`<a class="ad-slide${i?'':' on'}" href="${esc(a.href||'#advertise')}" ${/^https?:/.test(a.href||'')?'target="_blank" rel="noopener sponsored"':''}>${a.video?`<video src="${esc(a.video)}" ${a.poster?`poster="${esc(a.poster)}"`:''} autoplay muted loop playsinline preload="metadata"></video>`:a.img?`<img src="${esc(a.img)}" alt="${esc(a.title)}">`:`<div class="ad-bg" style="background:${a.bg}"></div><small>${esc(a.tag)}</small><strong>${esc(a.title)}</strong><span>${esc(a.text)}</span><em>${esc(a.cta)}</em>`}</a>`).join('')}
    </div></div>`;
 }
 let adTimer;
